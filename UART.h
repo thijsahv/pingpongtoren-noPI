@@ -7,8 +7,8 @@
 extern "C" {
 #endif /* __cplusplus */
     
-    void Java(void);
-    void printLogs();
+    void uartHandler(void);
+    void printLogs(void);
 
 #ifdef	__cplusplus
 }

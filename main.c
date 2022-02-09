@@ -1,8 +1,5 @@
 /* Demo project pingpongtoren + hoogtesensor 
  * 
- * standaard waarden: setpoint = 100
- *                    kp = 1
- *                    ki = 0.005
  * 
  * pinout:  RC2 = receiver input
  *          RC7 = transmitter output
@@ -18,7 +15,6 @@
 #include <stdint.h>
 #include "PI.h"
 #include "UART.h"
-
 
 /*
                          Main application
@@ -47,16 +43,23 @@ void main(void) {
     ADC_StartConversion();
     TMR2_Initialize();
     TMR2_StartTimer();
-        
+    
+    printf("Hello :) \r\n");
+
     while (1) {
-                
-            Java();
+
+        uartHandler();
+        
         // PI moet op een vaste frequentie (elke 33ms) lopen voor de integrator
         if (TMR0_HasOverflowOccured()) {
             TMR0_Initialize();
 
             PI();
-            printLogs();
+            static uint8_t printCycle = 0; //door static toe te voegen wordt "printCycle" niet elke keer her geinitialiseerd maar behoudt het zijn vorige waarde
+            if (printCycle++ > 30) {
+                printLogs();
+                printCycle = 0;
+            }
         }
     }
 }
