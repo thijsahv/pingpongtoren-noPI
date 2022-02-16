@@ -11,7 +11,7 @@
  */
 
 static uint8_t sensorHeight = 0;
-static uint8_t setpoint = 150; //255 is top
+static uint8_t setpoint = 80; 
 static int error = 0;
 static float integral = 0;
 static float ki = 0.004;
@@ -54,8 +54,7 @@ void PI(void) {
     //Hier dient jullie code toegevoegd te worden
     // error = ...
     // dutycycle = ...
-    error = setpoint - sensorHeight;
-    integral += error*ki;
+
 
             
 
