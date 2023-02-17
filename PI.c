@@ -52,10 +52,9 @@ void PI(void) {
     sensorHeight = (uint8_t) (ADC_GetConversionResult() >> 2); //resultaat van ADC (8 bit )
 
     //Hier dient jullie code toegevoegd te worden
-    // error = ...
-    // dutycycle = ...
-
-
+    error = sensorHeight - setpoint
+    dutycycle = error * PI_GetKp() + PI_GetKi()  // moeten hier dus een waarde terugvinden om te geven aan ventilator om blaassterkte aan te passen, zou ifv error moeten zijn
+    
             
 
     PWM5_LoadDutyValue( (uint16_t) dutycycle); // output pwm signaal voor hoogte 10 bit (van 0 tot 0x3FF)
